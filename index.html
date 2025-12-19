@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>三丽鸥粉丝官网 - 首页</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "幼圆", "微软雅黑", sans-serif;
+    }
+    body {
+      background-color: #FFF5F8;
+      color: #555;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    .container {
+      width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    .top-nav {
+      background-color: #FFC2D9;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      width: 80px;
+      height: 40px;
+      object-fit: contain;
+    }
+    .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+    .nav-links a {
+      color: #FF4D94;
+      font-size: 16px;
+      font-weight: 600;
+    }
+    .nav-links a.active {
+      color: #fff;
+    }
+    /* 通用轮播样式 */
+    .banner-swiper {
+      width: 100%;
+      height: 250px;
+      margin: 20px 0;
+      border-radius: 15px;
+      overflow: hidden;
+      position: relative;
+    }
+    .swiper-wrapper {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+    .swiper-slide {
+      width: 100%;
+      height: 100%;
+      flex-shrink: 0;
+    }
+    .swiper-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .swiper-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.8);
+      color: #FF4D94;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      font-size: 20px;
+      border: none;
+    }
+    .prev-btn {
+      left: 10px;
+    }
+    .next-btn {
+      right: 10px;
+    }
+    .swiper-dots {
+      position: absolute;
+      bottom: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+    }
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.6);
+      cursor: pointer;
+    }
+    .dot.active {
+      background-color: #FF4D94;
+    }
+    .section-title {
+      font-size: 24px;
+      color: #FF4D94;
+      text-align: center;
+      margin-bottom: 20px;
+      position: relative;
+    }
+    .section-title::after {
+      content: "";
+      display: block;
+      width: 80px;
+      height: 3px;
+      background-color: #FFC2D9;
+      margin: 10px auto 0;
+    }
+    .intro-section {
+      background-color: #fff;
+      border-radius: 15px;
+      padding: 30px;
+      margin: 30px 0;
+      box-shadow: 0 2px 8px rgba(255, 133, 179, 0.2);
+    }
+    .intro-content {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+    }
+    .intro-img {
+      width: 300px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+    .intro-text {
+      flex: 1;
+      line-height: 2;
+      color: #666;
+      font-size: 16px;
+    }
+    .family-section {
+      margin: 40px 0;
+    }
+    .character-cards {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+    .character-card {
+      text-align: center;
+      width: 150px;
+    }
+    .character-card img {
+      width: 100%;
+      height: 120px;
+      object-fit: contain;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+    .character-card p {
+      color: #FF4D94;
+      font-weight: 600;
+      font-size: 18px;
+    }
+    .recommend-section {
+      background-color: #fff;
+      border-radius: 15px;
+      padding: 30px;
+      margin: 40px 0;
+      box-shadow: 0 2px 8px rgba(255, 133, 179, 0.2);
+    }
+    .recommend-cards {
+      display: flex;
+      gap: 20px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+    .recommend-card {
+      flex: 1;
+      min-width: 280px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 2px solid #FFC2D9;
+    }
+    .recommend-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+    .recommend-card .card-content {
+      padding: 15px;
+    }
+    .recommend-card h4 {
+      color: #FF4D94;
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+    .recommend-card p {
+      color: #666;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .benefit-section {
+      margin: 40px 0;
+      text-align: center;
+    }
+    .benefit-box {
+      background-color: #FFC2D9;
+      color: #FF4D94;
+      border-radius: 15px;
+      padding: 20px;
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: 600;
+    }
+    .footer {
+      background-color: #FFC2D9;
+      text-align: center;
+      padding: 15px 0;
+      color: #FF4D94;
+      font-weight: 600;
+      margin-top: 40px;
+    }
+    @media (max-width: 768px) {
+      .intro-content {
+        flex-direction: column;
+      }
+      .intro-img {
+        width: 100%;
+      }
+      .character-cards {
+        gap: 20px;
+      }
+      .nav-links {
+        gap: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="top-nav">
+    <img src="img/sanrio-logo.png" alt="三丽鸥logo" class="logo">
+    <div class="nav-links">
+      <a href="./index.html" class="active">首页</a>
+      <a href="./character.html">角色图鉴</a>
+      <a href="./news.html">IP资讯</a>
+      <a href="./wallpaper.html">壁纸下载</a>
+      <a href="./message.html">粉丝留言墙</a>
+      <a href="./user.html">我的收藏</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- 5张图轮播 -->
+    <div class="banner-swiper">
+      <div class="swiper-wrapper" id="swiperWrapper">
+        <div class="swiper-slide"><img src="img/banner1.jpg" alt="轮播1"></div>
+        <div class="swiper-slide"><img src="img/banner2.jpg" alt="轮播2"></div>
+        <div class="swiper-slide"><img src="img/banner3.jpg" alt="轮播3"></div>
+        <div class="swiper-slide"><img src="img/banner4.jpg" alt="轮播4"></div>
+        <div class="swiper-slide"><img src="img/banner5.jpg" alt="轮播5"></div>
+      </div>
+      <button class="swiper-btn prev-btn" onclick="changeSlide(-1)">←</button>
+      <button class="swiper-btn next-btn" onclick="changeSlide(1)">→</button>
+      <div class="swiper-dots">
+        <div class="dot active" onclick="goToSlide(0)"></div>
+        <div class="dot" onclick="goToSlide(1)"></div>
+        <div class="dot" onclick="goToSlide(2)"></div>
+        <div class="dot" onclick="goToSlide(3)"></div>
+        <div class="dot" onclick="goToSlide(4)"></div>
+      </div>
+    </div>
+
+    <div class="intro-section">
+      <h3 class="section-title">关于三丽鸥</h3>
+      <div class="intro-content">
+        <img src="img/sanrio-intro.jpg" alt="三丽鸥介绍" class="intro-img">
+        <div class="intro-text">
+          三丽鸥（Sanrio）创立于1960年，是日本知名的品牌形象设计公司，以打造可爱的卡通形象闻名全球。Hello Kitty、Kuromi、玉桂狗、美乐蒂等经典形象，凭借治愈又可爱的风格，收获了各年龄段粉丝的喜爱。三丽鸥始终秉持「传递快乐与美好」的理念，通过多样化的产品、主题乐园、联名合作等方式，将可爱文化传递到世界的每个角落。
+        </div>
+      </div>
+    </div>
+
+    <div class="family-section">
+      <h3 class="section-title">人气家族成员</h3>
+      <div class="character-cards">
+        <div class="character-card">
+          <img src="img/kitty.png" alt="Hello Kitty">
+          <p>Hello Kitty</p>
+        </div>
+        <div class="character-card">
+          <img src="img/kuromi.png" alt="Kuromi">
+          <p>Kuromi</p>
+        </div>
+        <div class="character-card">
+          <img src="img/cinnamoroll.png" alt="cinnamoroll">
+          <p>cinnamoroll</p>
+        </div>
+        <div class="character-card">
+          <img src="img/melody.png" alt="melody">
+          <p>melody</p>
+        </div>
+        <div class="character-card">
+          <img src="img/pompompurin.png" alt="pompompurin">
+          <p>pompompurin</p>
+        </div>
+        <div class="character-card">
+          <img src="img/pochacco.png" alt="pochacco">
+          <p>pochacco</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="recommend-section">
+      <h3 class="section-title">热门内容推荐</h3>
+      <div class="recommend-cards">
+        <div class="recommend-card">
+          <img src="img/news1.jpg" alt="Hello Kitty 50周年">
+          <div class="card-content">
+            <h4>Hello Kitty 50周年纪念活动</h4>
+            <p>全球巡回展览、限定周边、公益合作，一起庆祝Kitty的50岁生日</p>
+          </div>
+        </div>
+        <div class="recommend-card">
+          <img src="img/kitty1.jpg" alt="粉色系壁纸">
+          <div class="card-content">
+            <h4>超治愈粉色系壁纸</h4>
+            <p>Hello Kitty、Kuromi、玉桂狗多款高清壁纸，免费下载使用</p>
+          </div>
+        </div>
+        <div class="recommend-card">
+          <img src="img/news3.jpg" alt="主题乐园新园区">
+          <div class="card-content">
+            <h4>三丽鸥主题乐园新园区</h4>
+            <p>粉色梦幻园区上线，沉浸式体验Hello Kitty的可爱世界</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="benefit-section">
+      <h3 class="section-title">粉丝专属福利</h3>
+      <div class="benefit-box">
+        ✨ 关注我们，不定期发放三丽鸥周边、壁纸礼包、主题乐园优惠券～
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>学号：25216950508 姓名：陈轩彤 © 2025 三丽鸥粉丝官网 - 仅用于学习用途</p>
+  </div>
+
+  <script>
+    let currentIndex = 0;
+    const slides = document.querySelectorAll('.swiper-slide');
+    const dots = document.querySelectorAll('.dot');
+    const slideCount = slides.length;
+
+    function changeSlide(direction) {
+      currentIndex = (currentIndex + direction + slideCount) % slideCount;
+      updateSlide();
+    }
+
+    function goToSlide(index) {
+      currentIndex = index;
+      updateSlide();
+    }
+
+    function updateSlide() {
+      const wrapper = document.getElementById('swiperWrapper');
+      wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+      dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentIndex);
+      });
+    }
+
+    setInterval(() => {
+      changeSlide(1);
+    }, 3000);
+  </script>
+</body>
+</html>
