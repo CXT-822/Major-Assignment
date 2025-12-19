@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>三丽鸥粉丝官网 - IP资讯</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "幼圆", "微软雅黑", sans-serif;
+    }
+    body {
+      background-color: #FFF5F8;
+      color: #555;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    .container {
+      width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    .top-nav {
+      background-color: #FFC2D9;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      width: 80px;
+      height: 40px;
+      object-fit: contain;
+    }
+    .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+    .nav-links a {
+      color: #FF4D94;
+      font-size: 16px;
+      font-weight: 600;
+    }
+    .nav-links a.active {
+      color: #fff;
+    }
+    /* 完全复用首页的轮播样式 */
+    .banner-swiper {
+      width: 100%;
+      height: 250px;
+      margin: 20px 0;
+      border-radius: 15px;
+      overflow: hidden;
+      position: relative;
+    }
+    .swiper-wrapper {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+    .swiper-slide {
+      width: 100%;
+      height: 100%;
+      flex-shrink: 0;
+    }
+    .swiper-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .swiper-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.8);
+      color: #FF4D94;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      font-size: 20px;
+      border: none;
+    }
+    .prev-btn {
+      left: 10px;
+    }
+    .next-btn {
+      right: 10px;
+    }
+    .swiper-dots {
+      position: absolute;
+      bottom: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+    }
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.6);
+      cursor: pointer;
+    }
+    .dot.active {
+      background-color: #FF4D94;
+    }
+    .page-title {
+      font-size: 28px;
+      color: #FF4D94;
+      text-align: center;
+      margin: 30px 0 20px;
+    }
+    /* 2×2网格布局 */
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2, auto);
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+    .news-item {
+      background-color: #fff;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(255, 133, 179, 0.2);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    .news-header {
+      margin-bottom: 15px;
+    }
+    .news-title {
+      font-size: 20px;
+      color: #FF4D94;
+      margin-bottom: 8px;
+    }
+    .news-meta {
+      display: flex;
+      justify-content: space-between;
+      color: #999;
+      font-size: 13px;
+    }
+    .news-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+    .news-content {
+      line-height: 1.8;
+      color: #666;
+      font-size: 15px;
+      flex: 1;
+    }
+    .news-content p {
+      margin-bottom: 10px;
+      text-indent: 2em;
+    }
+    .news-content .highlight {
+      color: #FF4D94;
+      font-weight: 600;
+    }
+    .footer {
+      background-color: #FFC2D9;
+      text-align: center;
+      padding: 15px 0;
+      color: #FF4D94;
+      font-weight: 600;
+      margin-top: 20px;
+    }
+    /* 响应式适配 */
+    @media (max-width: 768px) {
+      .news-grid {
+        grid-template-columns: 1fr;
+      }
+      .news-img {
+        height: 180px;
+      }
+      .nav-links {
+        gap: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="top-nav">
+    <img src="img/sanrio-logo.png" alt="三丽鸥logo" class="logo">
+    <div class="nav-links">
+      <a href="./index.html">首页</a>
+      <a href="./character.html">角色图鉴</a>
+      <a href="./news.html" class="active">IP资讯</a>
+      <a href="./wallpaper.html">壁纸下载</a>
+      <a href="./message.html">粉丝留言墙</a>
+      <a href="./user.html">我的收藏</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- 轮播图完全和首页一致：图片命名、尺寸、交互 -->
+    <div class="banner-swiper">
+      <div class="swiper-wrapper" id="swiperWrapper">
+        <div class="swiper-slide"><img src="img/banner1.jpg" alt="三丽鸥家族轮播1"></div>
+        <div class="swiper-slide"><img src="img/banner2.jpg" alt="三丽鸥家族轮播2"></div>
+        <div class="swiper-slide"><img src="img/banner3.jpg" alt="三丽鸥家族轮播3"></div>
+        <div class="swiper-slide"><img src="img/banner4.jpg" alt="三丽鸥家族轮播4"></div>
+        <div class="swiper-slide"><img src="img/banner5.jpg" alt="三丽鸥家族轮播5"></div>
+      </div>
+      <button class="swiper-btn prev-btn" onclick="changeSlide(-1)">←</button>
+      <button class="swiper-btn next-btn" onclick="changeSlide(1)">→</button>
+      <div class="swiper-dots">
+        <div class="dot active" onclick="goToSlide(0)"></div>
+        <div class="dot" onclick="goToSlide(1)"></div>
+        <div class="dot" onclick="goToSlide(2)"></div>
+        <div class="dot" onclick="goToSlide(3)"></div>
+        <div class="dot" onclick="goToSlide(4)"></div>
+      </div>
+    </div>
+
+    <h2 class="page-title">三丽鸥IP最新资讯</h2>
+
+    <!-- 2×2网格布局 - 4条资讯 -->
+    <div class="news-grid">
+      <!-- 第一行第一列 -->
+      <div class="news-item">
+        <div class="news-header">
+          <h3 class="news-title">Hello Kitty迎来50周年！全球纪念活动开启</h3>
+          <div class="news-meta">
+            <span>发布时间：2025-05-20</span>
+            <span>标签：周年纪念</span>
+          </div>
+        </div>
+        <img src="img/news1.jpg" alt="Hello Kitty 50周年" class="news-img">
+        <div class="news-content">
+          <p>2024年是<span class="highlight">Hello Kitty</span>诞生50周年，三丽鸥于2024年11月1日正式开启全球纪念活动，这场跨越半个世纪的可爱庆典，吸引了全球粉丝的关注。</p>
+          <p>本次活动以「50 Years of Love」为主题，从东京出发，先后在纽约、伦敦、上海等20多个城市举办巡回展览。</p>
+        </div>
+      </div>
+
+      <!-- 第一行第二列 -->
+      <div class="news-item">
+        <div class="news-header">
+          <h3 class="news-title">Kuromi全新粉色暗黑系形象发布，太酷啦！</h3>
+          <div class="news-meta">
+            <span>发布时间：2025-04-15</span>
+            <span>标签：新品发布</span>
+          </div>
+        </div>
+        <img src="img/news2.jpg" alt="Kuromi新形象" class="news-img">
+        <div class="news-content">
+          <p>2025年4月，三丽鸥为<span class="highlight">Kuromi（库洛米）</span>推出全新粉色暗黑系形象，一经发布便引发粉丝热议，相关话题迅速登上社交媒体热搜榜。</p>
+          <p>新形象保留经典黑色帽子、粉色骷髅元素，加入粉色渐变、蕾丝花边，酷飒又可爱。</p>
+        </div>
+      </div>
+
+      <!-- 第二行第一列 -->
+      <div class="news-item">
+        <div class="news-header">
+          <h3 class="news-title">三丽鸥主题乐园新增粉色梦幻园区，超治愈！</h3>
+          <div class="news-meta">
+            <span>发布时间：2025-03-10</span>
+            <span>标签：乐园动态</span>
+          </div>
+        </div>
+        <img src="img/news3.jpg" alt="三丽鸥主题乐园" class="news-img">
+        <div class="news-content">
+          <p>日本三丽鸥彩虹乐园于2025年3月开放全新<span class="highlight">粉色梦幻园区</span>，以Hello Kitty和美乐蒂为双主角，开园首日吸引上万名游客打卡。</p>
+          <p>新园区包含粉色城堡、甜品工坊等特色区域，沉浸式体验可爱世界。</p>
+        </div>
+      </div>
+
+      <!-- 第二行第二列 -->
+      <div class="news-item">
+        <div class="news-header">
+          <h3 class="news-title">玉桂狗联名奶茶全国上线，限量周边免费送</h3>
+          <div class="news-meta">
+            <span>发布时间：2025-02-28</span>
+            <span>标签：联名合作</span>
+          </div>
+        </div>
+        <img src="img/news4.jpg" alt="玉桂狗联名奶茶" class="news-img">
+        <div class="news-content">
+          <p>2025年2月，三丽鸥与知名奶茶品牌推出<span class="highlight">玉桂狗联名系列</span>，包含云朵奶茶、肉桂卷小料等新品，购买即送限量玉桂狗杯套。</p>
+          <p>联名活动覆盖全国300+门店，上线首日部分门店售罄，粉丝热情高涨。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>学号：25216950508 姓名：陈轩彤 © 2025 三丽鸥粉丝官网 - 仅用于学习用途</p>
+  </div>
+
+  <!-- 轮播JS完全复用首页逻辑 -->
+  <script>
+    let currentIndex = 0;
+    const slides = document.querySelectorAll('.swiper-slide');
+    const dots = document.querySelectorAll('.dot');
+    const slideCount = slides.length;
+
+    function changeSlide(direction) {
+      currentIndex = (currentIndex + direction + slideCount) % slideCount;
+      updateSlide();
+    }
+
+    function goToSlide(index) {
+      currentIndex = index;
+      updateSlide();
+    }
+
+    function updateSlide() {
+      const wrapper = document.getElementById('swiperWrapper');
+      wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+      dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentIndex);
+      });
+    }
+
+    setInterval(() => {
+      changeSlide(1);
+    }, 3000);
+  </script>
+</body>
+</html>
