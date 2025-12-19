@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>三丽鸥粉丝官网 - 粉丝留言墙</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "幼圆", "微软雅黑", sans-serif;
+    }
+    body {
+      background-color: #FFF5F8;
+      color: #555;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    .container {
+      width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    .top-nav {
+      background-color: #FFC2D9;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      width: 80px;
+      height: 40px;
+      object-fit: contain;
+    }
+    .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+    .nav-links a {
+      color: #FF4D94;
+      font-size: 16px;
+      font-weight: 600;
+    }
+    .nav-links a.active {
+      color: #fff;
+    }
+    /* 完全复用首页轮播样式 */
+    .banner-swiper {
+      width: 100%;
+      height: 250px;
+      margin: 20px 0;
+      border-radius: 15px;
+      overflow: hidden;
+      position: relative;
+    }
+    .swiper-wrapper {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+    .swiper-slide {
+      width: 100%;
+      height: 100%;
+      flex-shrink: 0;
+    }
+    .swiper-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .swiper-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.8);
+      color: #FF4D94;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      font-size: 20px;
+      border: none;
+    }
+    .prev-btn {
+      left: 10px;
+    }
+    .next-btn {
+      right: 10px;
+    }
+    .swiper-dots {
+      position: absolute;
+      bottom: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+    }
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.6);
+      cursor: pointer;
+    }
+    .dot.active {
+      background-color: #FF4D94;
+    }
+    .page-title {
+      font-size: 28px;
+      color: #FF4D94;
+      text-align: center;
+      margin: 30px 0 20px;
+    }
+    .message-box {
+      background-color: #fff;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 2px 8px rgba(255, 133, 179, 0.2);
+      margin-bottom: 30px;
+    }
+    .message-input {
+      width: 100%;
+      padding: 15px;
+      border: 2px solid #FFC2D9;
+      border-radius: 10px;
+      resize: none;
+      height: 150px;
+      font-family: inherit;
+      font-size: 16px;
+      color: #666;
+      margin-bottom: 15px;
+    }
+    .message-btn {
+      padding: 10px 30px;
+      background: #FFC2D9;
+      color: #FF4D94;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .message-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .message-item {
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(255, 133, 179, 0.1);
+    }
+    .message-user {
+      color: #FF4D94;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .message-content {
+      color: #666;
+      line-height: 1.8;
+    }
+    .message-time {
+      color: #999;
+      font-size: 14px;
+      margin-top: 10px;
+      text-align: right;
+    }
+    .footer {
+      background-color: #FFC2D9;
+      text-align: center;
+      padding: 15px 0;
+      color: #FF4D94;
+      font-weight: 600;
+      margin-top: 20px;
+    }
+    @media (max-width: 768px) {
+      .nav-links {
+        gap: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="top-nav">
+    <img src="img/sanrio-logo.png" alt="三丽鸥logo" class="logo">
+    <div class="nav-links">
+      <a href="./index.html">首页</a>
+      <a href="./character.html">角色图鉴</a>
+      <a href="./news.html">IP资讯</a>
+      <a href="./wallpaper.html">壁纸下载</a>
+      <a href="./message.html" class="active">粉丝留言墙</a>
+      <a href="./user.html">我的收藏</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- 轮播图和首页完全一致 -->
+    <div class="banner-swiper">
+      <div class="swiper-wrapper" id="swiperWrapper">
+        <div class="swiper-slide"><img src="img/banner1.jpg" alt="三丽鸥家族轮播1"></div>
+        <div class="swiper-slide"><img src="img/banner2.jpg" alt="三丽鸥家族轮播2"></div>
+        <div class="swiper-slide"><img src="img/banner3.jpg" alt="三丽鸥家族轮播3"></div>
+        <div class="swiper-slide"><img src="img/banner4.jpg" alt="三丽鸥家族轮播4"></div>
+        <div class="swiper-slide"><img src="img/banner5.jpg" alt="三丽鸥家族轮播5"></div>
+      </div>
+      <button class="swiper-btn prev-btn" onclick="changeSlide(-1)">←</button>
+      <button class="swiper-btn next-btn" onclick="changeSlide(1)">→</button>
+      <div class="swiper-dots">
+        <div class="dot active" onclick="goToSlide(0)"></div>
+        <div class="dot" onclick="goToSlide(1)"></div>
+        <div class="dot" onclick="goToSlide(2)"></div>
+        <div class="dot" onclick="goToSlide(3)"></div>
+        <div class="dot" onclick="goToSlide(4)"></div>
+      </div>
+    </div>
+
+    <h2 class="page-title">粉丝留言墙</h2>
+
+    <div class="message-box">
+      <textarea class="message-input" placeholder="写下你对三丽鸥的喜爱吧～"></textarea>
+      <button class="message-btn" onclick="addMessage()">提交留言</button>
+    </div>
+
+    <div class="message-list" id="messageList">
+      <div class="message-item">
+        <div class="message-user">小粉兔</div>
+        <div class="message-content">Hello Kitty真的太可爱了！收集了好多周边，每天看着心情都超好～</div>
+        <div class="message-time">2025-05-20 12:30</div>
+      </div>
+      <div class="message-item">
+        <div class="message-user">酷洛米爱好者</div>
+        <div class="message-content">新出的Kuromi粉色暗黑系形象太戳我了！求同款周边链接～</div>
+        <div class="message-time">2025-05-18 18:45</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>学号：25216950508 姓名：陈轩彤 © 2025 三丽鸥粉丝官网 - 仅用于学习用途</p>
+  </div>
+
+  <script>
+    // 轮播JS和首页完全一致
+    let currentIndex = 0;
+    const slides = document.querySelectorAll('.swiper-slide');
+    const dots = document.querySelectorAll('.dot');
+    const slideCount = slides.length;
+
+    function changeSlide(direction) {
+      currentIndex = (currentIndex + direction + slideCount) % slideCount;
+      updateSlide();
+    }
+
+    function goToSlide(index) {
+      currentIndex = index;
+      updateSlide();
+    }
+
+    function updateSlide() {
+      const wrapper = document.getElementById('swiperWrapper');
+      wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+      dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentIndex);
+      });
+    }
+
+    setInterval(() => {
+      changeSlide(1);
+    }, 3000);
+
+    // 留言功能
+    function addMessage() {
+      const input = document.querySelector('.message-input');
+      const content = input.value.trim();
+      if (!content) {
+        alert('留言内容不能为空哦～');
+        return;
+      }
+      const now = new Date();
+      const time = `${now.getFullYear()}-${(now.getMonth()+1).toString().padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')} ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+      const messageList = document.getElementById('messageList');
+      const newItem = document.createElement('div');
+      newItem.className = 'message-item';
+      newItem.innerHTML = `
+        <div class="message-user">匿名粉丝</div>
+        <div class="message-content">${content}</div>
+        <div class="message-time">${time}</div>
+      `;
+      messageList.insertBefore(newItem, messageList.firstChild);
+      input.value = '';
+      alert('留言提交成功啦～');
+    }
+  </script>
+</body>
+</html>
